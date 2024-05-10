@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Submit Application</title>
+    </head>
+    <body>
+        <h1>Application</h1>
+        <form method="post" action="/processApp">
+            <div style="border-style: solid; padding: 1rem">
+                <label><strong>Name: </strong></label>
+                <input type="text" name="name">
+                <label><strong>Email Address: </strong></label>
+                <input type="email" name="email"><br><br>
+                <label><strong>GPA: </strong></label>
+                <input type="text" name="gpa"><br><br>
+                <label><strong>Background Information: </strong></label><br>
+                <textarea rows="10" cols="80" name="background"></textarea>
+                </div>
+                <br>
+                <input type="reset">
+                <input type='submit' value="Submit Application" onclick='return confirm("Are you sure you want to submit your application?\nYou will not be able to change your information once submitted.")'>
+        </form>
+        <hr>
+        <a href="/">HOME</a>
+    </body>
+</html>
