@@ -6,11 +6,19 @@
   </head>
   <body>
     <h1>Search Breweries</h1>
-    <form action="./Brew" method="post">
+    <form action="./brewState" method="post">
       <label><strong>State: </strong></label>
       <input type="text" name="state" />
+      <input type="reset" />
+      <input type="submit" value="Submit Request" />
+    </form></br>
+    <form action="./brewCity" method="post"></form>
       <label><strong>City: </strong></label>
       <input type="text" name="city" />
+      <input type="reset" />
+      <input type="submit" value="Submit Request" />
+  </form></br></br>
+    <form action = "./brewType">
       <label><strong>Type: </strong></label>
       <select name="type">
         <option value=""></option>

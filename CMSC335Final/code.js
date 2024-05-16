@@ -27,6 +27,7 @@ const client = new MongoClient(uri, {
 });
 
 let portNum = process.argv[2];
+const ROOT = `http://localhost:${portNumber}`;
 
 //handling command line arguments and events
 app.listen(portNum, () => {
@@ -63,12 +64,21 @@ app.get("/brew", async (req, res) => {
 });
 
 //adding application and its info to mongodb
-app.post("/Brew", async(req, res) => {
-  let {city, state ,type} = req.body;
-  let info = {city: city, state: state, type: type};
-  try{
-      const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
-  } catch(err){
-      console.error(err)
+app.post("/Brew", async (req, res) => {
+  let { city, state, type } = req.body;
+  let info = { city: city, state: state, type: type };
+  try {
+    const entry = await client
+      .db(dbInfo.db)
+      .collection(dbInfo.collection)
+      .insertOne(info);
+  } catch (err) {
+    console.error(err);
   }
 });
+
+app.get("/recentSearches", (req, res) => {
+  let URL = ROOT + "/recentSearches";
+});
+
+app.get("/recentSearches", (req, res) => {});
