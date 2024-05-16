@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bp = require("body-parser");
 const path = require("path");
-const axios = require("axios")
+const axios = require("axios");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 //setting up templates
@@ -64,19 +64,25 @@ app.get("/brew", async (req, res) => {
   res.render("brewSearch");
 });
 
-
 app.post("/brewState", async (req, res) => {
   let { state } = req.body;
   let info = { state: state };
-  
+
   try {
     // Insert the city info into MongoDB
-    const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
+    const entry = await client
+      .db(dbInfo.db)
+      .collection(dbInfo.collection)
+      .insertOne(info);
 
     // Fetching the breweries from Open Brewery DB API
-    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_state=${state}`);
+    const response = await axios.get(
+      `https://api.openbrewerydb.org/breweries?by_state=${state}`
+    );
     let breweries = response.data;
-    breweries = breweries.filter(brewery => brewery.state.toLowerCase() === state.toLowerCase());
+    breweries = breweries.filter(
+      (brewery) => brewery.state.toLowerCase() === state.toLowerCase()
+    );
 
     // Create an HTML table with the breweries data
     let table = `
@@ -90,7 +96,7 @@ app.post("/brewState", async (req, res) => {
           <th>Website</th>
         </tr>
     `;
-    breweries.forEach(brewery => {
+    breweries.forEach((brewery) => {
       table += `
         <tr>
           <td>${brewery.name}</td>
@@ -98,33 +104,43 @@ app.post("/brewState", async (req, res) => {
           <td>${brewery.street}</td>
           <td>${brewery.city}</td>
           <td>${brewery.state}</td>
-          <td>${brewery.website_url ? `<a href="${brewery.website_url}">${brewery.website_url}</a>` : 'N/A'}</td>
+          <td>${
+            brewery.website_url
+              ? `<a href="${brewery.website_url}">${brewery.website_url}</a>`
+              : "N/A"
+          }</td>
         </tr>
       `;
     });
     table += `</table>`;
 
     // Render the EJS template with the table
-    res.render('brewDisplay', { table: table });
+    res.render("brewDisplay", { table: table });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
 });
 
-
 app.post("/brewCity", async (req, res) => {
   let { city } = req.body;
   let info = { city: city };
-  
+
   try {
     // Insert the city info into MongoDB
-    const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
+    const entry = await client
+      .db(dbInfo.db)
+      .collection(dbInfo.collection)
+      .insertOne(info);
 
     // Fetching the breweries from Open Brewery DB API
-    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_city=${city}`);
+    const response = await axios.get(
+      `https://api.openbrewerydb.org/breweries?by_city=${city}`
+    );
     let breweries = response.data;
-    breweries = breweries.filter(brewery => brewery.city.toLowerCase() === city.toLowerCase());
+    breweries = breweries.filter(
+      (brewery) => brewery.city.toLowerCase() === city.toLowerCase()
+    );
     console.log(breweries);
 
     // Create an HTML table with the breweries data
@@ -139,7 +155,7 @@ app.post("/brewCity", async (req, res) => {
           <th>Website</th>
         </tr>
     `;
-    breweries.forEach(brewery => {
+    breweries.forEach((brewery) => {
       table += `
         <tr>
           <td>${brewery.name}</td>
@@ -147,14 +163,18 @@ app.post("/brewCity", async (req, res) => {
           <td>${brewery.street}</td>
           <td>${brewery.city}</td>
           <td>${brewery.state}</td>
-          <td>${brewery.website_url ? `<a href="${brewery.website_url}">${brewery.website_url}</a>` : 'N/A'}</td>
+          <td>${
+            brewery.website_url
+              ? `<a href="${brewery.website_url}">${brewery.website_url}</a>`
+              : "N/A"
+          }</td>
         </tr>
       `;
     });
     table += `</table>`;
 
     // Render the EJS template with the table
-    res.render('brewDisplay', { table: table });
+    res.render("brewDisplay", { table: table });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -163,13 +183,18 @@ app.post("/brewCity", async (req, res) => {
 app.post("/brewType", async (req, res) => {
   let { type } = req.body;
   let info = { type: type };
-  
+
   try {
     // Insert the city info into MongoDB
-    const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
+    const entry = await client
+      .db(dbInfo.db)
+      .collection(dbInfo.collection)
+      .insertOne(info);
 
     // Fetching the breweries from Open Brewery DB API
-    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_type=${type}`);
+    const response = await axios.get(
+      `https://api.openbrewerydb.org/breweries?by_type=${type}`
+    );
     const breweries = response.data;
 
     // Create an HTML table with the breweries data
@@ -184,7 +209,7 @@ app.post("/brewType", async (req, res) => {
           <th>Website</th>
         </tr>
     `;
-    breweries.forEach(brewery => {
+    breweries.forEach((brewery) => {
       table += `
         <tr>
           <td>${brewery.name}</td>
@@ -192,22 +217,44 @@ app.post("/brewType", async (req, res) => {
           <td>${brewery.street}</td>
           <td>${brewery.city}</td>
           <td>${brewery.state}</td>
-          <td>${brewery.website_url ? `<a href="${brewery.website_url}">${brewery.website_url}</a>` : 'N/A'}</td>
+          <td>${
+            brewery.website_url
+              ? `<a href="${brewery.website_url}">${brewery.website_url}</a>`
+              : "N/A"
+          }</td>
         </tr>
       `;
     });
     table += `</table>`;
 
     // Render the EJS template with the table
-    res.render('brewDisplay', { table: table });
+    res.render("brewDisplay", { table: table });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
 });
 
-app.get("/recentSearches", (req, res) => {
-  let URL = ROOT + "/recentSearches";
+app.get("/recentSearches", async (req, res) => {
+  let searchVal = req.query.filter;
+  let title = searchVal.toUpperCase();
+  try {
+    await client.connect();
+    const query = {};
+    query[searchVal] = { $exists: true, $ne: null };
+    const searches = await client
+      .db(dbInfo.db)
+      .collection(dbInfo.collection)
+      .find(query)
+      .toArray();
+    list = `<h2><u>${title}</u></h2><ul>`;
+    searches.forEach((i) => {
+      list += `<li>${i[searchVal]}</li>`;
+    });
+    list += "<ul>";
+    res.render("recentSearches", { list, list });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
-
-app.get("/recentSearches", (req, res) => {});
