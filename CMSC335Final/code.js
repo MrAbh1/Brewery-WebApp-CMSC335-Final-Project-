@@ -64,30 +64,19 @@ app.get("/brew", async (req, res) => {
   res.render("brewSearch");
 });
 
-//adding application and its info to mongodb
+
 app.post("/brewState", async (req, res) => {
   let { state } = req.body;
-  let info = {state: state};
-  try {
-    const entry = await client
-      .db(dbInfo.db)
-      .collection(dbInfo.collection)
-      .insertOne(info);
-  } catch (err) {
-    console.error(err);
-  }
-});
-app.post("/brewCity", async (req, res) => {
-  let { city } = req.body;
-  let info = { city: city };
+  let info = { state: state };
   
   try {
     // Insert the city info into MongoDB
     const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
 
     // Fetching the breweries from Open Brewery DB API
-    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_city=${city}`);
-    const breweries = response.data;
+    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_state=${state}`);
+    let breweries = response.data;
+    breweries = breweries.filter(brewery => brewery.state.toLowerCase() === state.toLowerCase());
 
     // Create an HTML table with the breweries data
     let table = `
@@ -122,17 +111,98 @@ app.post("/brewCity", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-//adding application and its info to mongodb
-app.post("/brewType", async (req, res) => {
-  let { type } = req.body;
-  let info = {type: type};
+
+
+app.post("/brewCity", async (req, res) => {
+  let { city } = req.body;
+  let info = { city: city };
+  
   try {
-    const entry = await client
-      .db(dbInfo.db)
-      .collection(dbInfo.collection)
-      .insertOne(info);
+    // Insert the city info into MongoDB
+    const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
+
+    // Fetching the breweries from Open Brewery DB API
+    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_city=${city}`);
+    let breweries = response.data;
+    breweries = breweries.filter(brewery => brewery.city.toLowerCase() === city.toLowerCase());
+    console.log(breweries);
+
+    // Create an HTML table with the breweries data
+    let table = `
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Street</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Website</th>
+        </tr>
+    `;
+    breweries.forEach(brewery => {
+      table += `
+        <tr>
+          <td>${brewery.name}</td>
+          <td>${brewery.brewery_type}</td>
+          <td>${brewery.street}</td>
+          <td>${brewery.city}</td>
+          <td>${brewery.state}</td>
+          <td>${brewery.website_url ? `<a href="${brewery.website_url}">${brewery.website_url}</a>` : 'N/A'}</td>
+        </tr>
+      `;
+    });
+    table += `</table>`;
+
+    // Render the EJS template with the table
+    res.render('brewDisplay', { table: table });
   } catch (err) {
     console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.post("/brewType", async (req, res) => {
+  let { type } = req.body;
+  let info = { type: type };
+  
+  try {
+    // Insert the city info into MongoDB
+    const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
+
+    // Fetching the breweries from Open Brewery DB API
+    const response = await axios.get(`https://api.openbrewerydb.org/breweries?by_type=${type}`);
+    const breweries = response.data;
+
+    // Create an HTML table with the breweries data
+    let table = `
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Street</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Website</th>
+        </tr>
+    `;
+    breweries.forEach(brewery => {
+      table += `
+        <tr>
+          <td>${brewery.name}</td>
+          <td>${brewery.brewery_type}</td>
+          <td>${brewery.street}</td>
+          <td>${brewery.city}</td>
+          <td>${brewery.state}</td>
+          <td>${brewery.website_url ? `<a href="${brewery.website_url}">${brewery.website_url}</a>` : 'N/A'}</td>
+        </tr>
+      `;
+    });
+    table += `</table>`;
+
+    // Render the EJS template with the table
+    res.render('brewDisplay', { table: table });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
