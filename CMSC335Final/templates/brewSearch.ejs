@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>brewSearch</title>
+  </head>
+  <body>
+    <h1>Search Breweries</h1>
+    <form action="./Brew" method="post">
+      <label><strong>State: </strong></label>
+      <input type="text" name="state" />
+      <label><strong>City: </strong></label>
+      <input type="text" name="city" />
+      <label><strong>Type: </strong></label>
+      <select>
+        <option value=""></option>
+        <option value="micro">micro</option>
+        <option value="nano">nano</option>
+        <option value="regional">regional</option>
+        <option value="brewpub">brewpub</option>
+        <option value="planning">planning</option>
+        <option value="contract">contract</option>
+      </select>
+      <input type="reset" />
+      <input type="submit" value="Submit Request" />
+    </form>
+    <hr />
+    <a href="/">HOME</a>
+  </body>
+</html>

@@ -57,3 +57,13 @@ app.get("/", async (req, res) => {
     console.log(err);
   }
 });
+
+app.get("/brewSearch"),
+  async (req, res) => {
+    try {
+      await client.connect();
+      res.render("/brewSearch");
+    } catch (err) {
+      console.log(e);
+    }
+  };
