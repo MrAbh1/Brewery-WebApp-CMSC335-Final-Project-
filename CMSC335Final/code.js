@@ -61,3 +61,14 @@ app.get("/", async (req, res) => {
 app.get("/brew", async (req, res) => {
   res.render("brewSearch");
 });
+
+//adding application and its info to mongodb
+app.post("/Brew", async(req, res) => {
+  let {city, state ,type} = req.body;
+  let info = {city: city, state: state, type: type};
+  try{
+      const entry = await client.db(dbInfo.db).collection(dbInfo.collection).insertOne(info);
+  } catch(err){
+      console.error(err)
+  }
+});
