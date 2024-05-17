@@ -28,8 +28,15 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-
-const portNum = process.env.PORT || 3000;
+/*
+  portnum instantiated so deployment server can use its own port number
+  and also for local host testing for user specified port number
+*/
+if (process.argv[2] == null) {
+  console.error("please input port number for local access");
+  process.exit(1);
+}
+const portNum = process.env.PORT || process.argv[2];
 
 //handling command line arguments and events
 app.listen(portNum, () => {
