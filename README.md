@@ -6,4 +6,4 @@
 <p><strong>APIs:</strong>Open Brew DB (<a href="https://www.openbrewerydb.org/">https://www.openbrewerydb.org/</a>)</p>
 <p><strong>Contact Email: </strong><a href="nharish@terpmail.umd.edu">Naveen Harish</a></p>
 <p><strong>Contact Email: </strong><a href="akagitha@terpmail.umd.edu">Abhiram Kagitha</a></p>
-<p><strong>URL: <a href = "https://brewery-webapp-cmsc335-final-project.onrender.com">BreweryWebApp</a> (Deployed Through Render)</strong></p>
+<p><strong>URL: <a href = "https://brewery-webapp-cmsc335-final-project.onrender.com">BreweryWebApp</a> (Deployed Using Render)</strong></p>
