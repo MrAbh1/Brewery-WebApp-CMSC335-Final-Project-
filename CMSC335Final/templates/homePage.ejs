@@ -3,12 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <title>Home Page</title>
+    <link href= "/public/assets/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <h1>Welcome to Brewery Tracker</h1>
+    <div id="section">
     <h3>Find Nearest Brewery: <a href="/brew">Brew On!</a></h3>
-      </li>
-    </ul>
     <hr />
+    <h3>View Recent Searches:</h3>
+    <form action="/recentSearches" method="get">
+      <button type="submit" name = "filter" value = "city">By City</button>
+      <button type="submit" name = "filter" value = "state">By State</button>
+      <button type="submit" name = "filter" value = "type">By type</button>
+    </form>
+    <form action='/processRemove' method='post'>
+      <input type='submit' onclick='return confirm("Are you sure you want to clear search results?");' value='Clear Search'>
+    </form>
+  </div>
   </body>
 </html>

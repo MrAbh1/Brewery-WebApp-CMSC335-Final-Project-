@@ -7,6 +7,8 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 
 //setting up templates
 app.use(bp.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static('public'));
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
@@ -125,7 +127,6 @@ app.post("/brewCity", async (req, res) => {
       breweries = breweries.filter(
         (brewery) => brewery.city.toLowerCase() === city.toLowerCase()
       );
-      console.log(breweries);
 
       // Create an HTML table with the breweries data
       let table = genBrewTable(breweries);
@@ -190,6 +191,15 @@ app.get("/recentSearches", async (req, res) => {
   }
 });
 
+app.post("/processRemove", async(req, res)=>{
+  try{
+      const result = await client.db(dbInfo.db).collection(dbInfo.collection).deleteMany({});
+      console.log(result.deletedCount);
+  } catch(err){
+      console.error(err)
+}
+})
+
 function genBrewTable(breweries) {
   let table = `
         <table border="1">
@@ -221,3 +231,4 @@ function genBrewTable(breweries) {
   table += `</table>`;
   return table;
 }
+

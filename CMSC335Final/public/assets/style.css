@@ -1,0 +1,153 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+    background-image:url("brewImg.png")
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color:whitesmoke;
+    max-width: fit-content;
+}
+
+h3 {
+    color: #34495e;
+    margin: 20px 0;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 30px 0;
+}
+
+form {
+    margin: 10px 0;
+    text-align: center;
+}
+
+button, input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 20px auto;
+}
+
+table{
+    background-color:rgba(252, 252, 252, 0.9); 
+}
+
+
+
+#recents{
+    background-color: rgba(252, 252, 252, 0.9); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Adjust as needed */
+    max-width: 600px; /* Adjust as needed */
+    text-align: center;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;   
+    position: relative;
+}
+
+/* Position the link at the bottom center */
+#homeRecent {
+    position: absolute;
+    bottom: 10px; /* Adjust this value as needed */
+    right: 10px; /* Adjust this value as needed */
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+#homeDisplay{
+    position: absolute;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    
+}
+/* Style for the centered div with id 'section' */
+#section {
+    background-color: rgba(252, 252, 252, 0.9); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Adjust as needed */
+    max-width: 600px; /* Adjust as needed */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+  
+}
+
+/* Additional styling for content inside the div */
+#section h1, #section p {
+    margin: 10px 0;
+}
+
+#homeDisplay {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #homeDisplay:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Centered content */
+  #brewContent {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%; /* Adjust the width as needed */
+    max-width: 1000px; /* Adjust the max-width as needed */
+  }

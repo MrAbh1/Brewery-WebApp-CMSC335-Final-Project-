@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <title>brewSearch</title>
+    <link href= "/public/assets/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <h1><u>Breweries Search</u></h1>
+    <div id="section">
     <h3>Search by State</h3>
     <form action="./brewState" method="post">
       <label><strong>State: </strong></label>
@@ -13,7 +15,7 @@
       <input type="reset" />
       <input type="submit" value="Submit Request" />
     </form></br>
-    <hr>
+
     <h3>Search by City</h3>
     <form action="./brewCity" method="post">
       <label><strong>City: </strong></label>
@@ -21,7 +23,7 @@
       <input type="reset" />
       <input type="submit" value="Submit Request" />
   </form></br></br>
-  <hr>
+
   <h3>Search by Type</h3>
     <form action = "./brewType" method="post">
       <label><strong>Type: </strong></label>
@@ -37,13 +39,8 @@
       <input type="reset" />
       <input type="submit" value="Submit Request" />
     </form></br></br>
-    <form action="/recentSearches" method="get">
-      <h3>Recent Searches</h3>
-      <button type="submit" name = "filter" value = "city">By City</button>
-      <button type="submit" name = "filter" value = "state">By State</button>
-      <button type="submit" name = "filter" value = "type">By type</button>
-    </form>
-    <hr>
-    <a href="/">HOME</a>
+
+    <a class="home" href="/">HOME</a>
+    </div>
   </body>
 </html>

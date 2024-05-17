@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>Recent</title>
+    <link href= "/public/assets/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <form>
       <h1>
         <strong><u>Recent Searches</u></strong>
       </h1>
-      <div id="recents"><%- list %></div>
+      <div id="recents">
+        <%- list %>
+        <a id="homeRecent" href="/">HOME</a>
+      </div>
     </form>
   </body>
 </html>
