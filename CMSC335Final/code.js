@@ -7,8 +7,8 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 
 //setting up templates
 app.use(bp.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/public', express.static('public'));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/public", express.static("public"));
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
@@ -29,8 +29,7 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-let portNum = process.argv[2];
-const ROOT = `http://localhost:${portNum}`;
+const portNum = process.env.PORT || 3000;
 
 //handling command line arguments and events
 app.listen(portNum, () => {
@@ -191,14 +190,17 @@ app.get("/recentSearches", async (req, res) => {
   }
 });
 
-app.post("/processRemove", async(req, res)=>{
-  try{
-      const result = await client.db(dbInfo.db).collection(dbInfo.collection).deleteMany({});
-      console.log(result.deletedCount);
-  } catch(err){
-      console.error(err)
-}
-})
+app.post("/processRemove", async (req, res) => {
+  try {
+    const result = await client
+      .db(dbInfo.db)
+      .collection(dbInfo.collection)
+      .deleteMany({});
+    console.log(result.deletedCount);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 function genBrewTable(breweries) {
   let table = `
@@ -231,4 +233,3 @@ function genBrewTable(breweries) {
   table += `</table>`;
   return table;
 }
-
